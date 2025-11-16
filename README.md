@@ -1,6 +1,6 @@
 # Reverse proxy
 
-# Esse respositória irá concentrar a criação básica do apache utilizando porxy reverso junto com containerização.
+## Esse respositória irá concentrar a criação básica do apache utilizando porxy reverso junto com containerização.
 
 A pasta `docker` é responssável por toda configuração das imagens dos containers incluindo o proxy reverso do apache.
 
@@ -33,6 +33,6 @@ Por fim será preciso iniciar os containers, para isso basta executar os seguint
 `docker compose up -d`
 
 
-# Estrutura de pastas
+## Estrutura de pastas
 
 A pasta `docker` é responsável por armazenar toda as configurações dockers e nela, cada container terá seu respectivo arquivo de configuração. Já a pasta `htdocs`, será responsável por guardar todos os arquivos da aplicação em si.
