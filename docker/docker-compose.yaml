@@ -1,0 +1,45 @@
+services:
+  reverse-proxy:
+    build:
+      context: ./containers/apache
+      dockerfile: Dockerfile
+    container_name: reverse-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./containers/apache/conf/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    depends_on:
+      - blog-service
+      - dashboard-service
+    networks:
+      - reverse-proxy-network
+  
+  blog-service:
+    build:
+      context: ./containers/blog
+      dockerfile: Dockerfile
+    container_name: blog-service
+    volumes:
+      - ./../htdocs/blog:/var/www/html
+    expose:
+      - "80"
+    networks:
+      - reverse-proxy-network
+    restart: unless-stopped
+
+  dashboard-service:
+    build:
+      context: ./containers/dashboard
+      dockerfile: Dockerfile
+    container_name: dashboard-service
+    expose:
+      - "80"
+    volumes:
+      - ./../htdocs/dashboard:/var/www/html
+    networks:
+      - reverse-proxy-network
+    restart: unless-stopped
+
+networks:
+  reverse-proxy-network:
+    driver: bridge    
